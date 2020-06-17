@@ -16,6 +16,7 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 import Loader from '../../Components/Loader';
+import * as Animatable from 'react-native-animatable';
 
 const RegisterScreen = (props) => {
   let [userEmail, setUserEmail] = useState('');
@@ -28,7 +29,11 @@ const RegisterScreen = (props) => {
 
   const handleSubmitPress = () => {
     setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
 
+      setIsRegistraionSuccess(true);
+    }, 5000);
     setErrortext('');
     if (!userEmail) {
       // alert('Please fill Email');
@@ -43,13 +48,12 @@ const RegisterScreen = (props) => {
       return;
     }
   };
-  setTimeout(() => {
-    setIsRegistraionSuccess(true);
-  }, 5000);
 
   if (isRegistraionSuccess) {
     return (
-      <View
+      <Animatable.View
+        animation="bounceInDown"
+        duration={2500}
         style={{
           flex: 1,
           backgroundColor: isSwitchOn ? '#000' : '#fff',
@@ -69,12 +73,15 @@ const RegisterScreen = (props) => {
           onPress={() => props.navigation.navigate('Login')}>
           <Text style={styles.buttonTextStyle}>Login Now</Text>
         </TouchableOpacity>
-      </View>
+      </Animatable.View>
     );
   }
 
   return (
-    <View style={isSwitchOn ? styles.mainBody : styles.mainBodyWhite}>
+    <Animatable.View
+      style={isSwitchOn ? styles.mainBody : styles.mainBodyWhite}
+      animation="fadeInLeftBig"
+      duration={1500}>
       <Loader loading={loading} />
       <ScrollView keyboardShouldPersistTaps="handled">
         <View style={{marginTop: 100}}>
@@ -91,19 +98,24 @@ const RegisterScreen = (props) => {
                 elevation: 20,
                 marginBottom: 30,
               }}>
-              <TouchableOpacity
-                onPress={() => setIsSwitchOn(!isSwitchOn ? true : false)}>
-                <Image
-                  source={LOGO.LOGO_LOGIN}
-                  style={{
-                    width: 200,
-                    height: 200,
-                    resizeMode: 'contain',
-                  }}
-                />
-              </TouchableOpacity>
+              <Animatable.View animation="bounceInDown" duration={3500}>
+                <TouchableOpacity
+                  onPress={() => setIsSwitchOn(!isSwitchOn ? true : false)}>
+                  <Image
+                    source={LOGO.LOGO_LOGIN}
+                    style={{
+                      width: 200,
+                      height: 200,
+                      resizeMode: 'contain',
+                    }}
+                  />
+                </TouchableOpacity>
+              </Animatable.View>
             </View>
-            <View style={styles.SectionStyle}>
+            <Animatable.View
+              style={styles.SectionStyle}
+              animation="bounceInLeft"
+              duration={3500}>
               <TextInput
                 style={isSwitchOn ? styles.inputStyle : styles.inputStyleWhite}
                 onChangeText={(nameUser) => setNameUser(nameUser)}
@@ -115,8 +127,11 @@ const RegisterScreen = (props) => {
                 returnKeyType="next"
                 blurOnSubmit={false}
               />
-            </View>
-            <View style={styles.SectionStyle}>
+            </Animatable.View>
+            <Animatable.View
+              style={styles.SectionStyle}
+              animation="bounceInRight"
+              duration={3500}>
               <TextInput
                 style={isSwitchOn ? styles.inputStyle : styles.inputStyleWhite}
                 onChangeText={(UserEmail) => setUserEmail(UserEmail)}
@@ -128,8 +143,11 @@ const RegisterScreen = (props) => {
                 returnKeyType="next"
                 blurOnSubmit={false}
               />
-            </View>
-            <View style={styles.SectionStyle}>
+            </Animatable.View>
+            <Animatable.View
+              style={styles.SectionStyle}
+              animation="bounceInLeft"
+              duration={3500}>
               <TextInput
                 style={isSwitchOn ? styles.inputStyle : styles.inputStyleWhite}
                 onChangeText={(UserPassword) => setUserPassword(UserPassword)}
@@ -141,16 +159,18 @@ const RegisterScreen = (props) => {
                 blurOnSubmit={false}
                 secureTextEntry={true}
               />
-            </View>
+            </Animatable.View>
             {errortext != '' ? (
               <Text style={styles.errorTextStyle}> {errortext} </Text>
             ) : null}
-            <TouchableOpacity
-              style={styles.buttonStyle}
-              activeOpacity={0.5}
-              onPress={handleSubmitPress}>
-              <Text style={styles.buttonTextStyle}>REGISTER</Text>
-            </TouchableOpacity>
+            <Animatable.View animation="bounceIn" duration={4000}>
+              <TouchableOpacity
+                style={styles.buttonStyle}
+                activeOpacity={0.5}
+                onPress={() => handleSubmitPress()}>
+                <Text style={styles.buttonTextStyle}>REGISTER</Text>
+              </TouchableOpacity>
+            </Animatable.View>
             <Text
               style={
                 isSwitchOn
@@ -163,7 +183,7 @@ const RegisterScreen = (props) => {
           </KeyboardAvoidingView>
         </View>
       </ScrollView>
-    </View>
+    </Animatable.View>
   );
 };
 export default RegisterScreen;

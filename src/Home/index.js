@@ -11,6 +11,7 @@ import {
 } from 'react-native';
 import {DATA} from '../assets/Imports/index';
 import {ICONS} from '../assets/Imports';
+import * as Animatable from 'react-native-animatable';
 
 function HomeScreen({navigation}) {
   const [data, setData] = useState([]);
@@ -20,27 +21,11 @@ function HomeScreen({navigation}) {
   }, []);
 
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.logoView}>
-        <TouchableOpacity>
-          <Image source={ICONS.LOGO} style={styles.logo} />
-        </TouchableOpacity>
-      </View>
-      <View style={styles.scroll}>
-        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-          {data.map((item, index) => {
-            return (
-              <View key={index} style={styles.Card}>
-                <TouchableOpacity style={styles.cardView}>
-                  <Image source={{uri: item.image}} style={styles.image} />
-                  <Text style={styles.text}>{item.name}</Text>
-                </TouchableOpacity>
-              </View>
-            );
-          })}
-        </ScrollView>
-      </View>
-    </SafeAreaView>
+    <Animatable.View
+      style={styles.container}
+      animation="fadeInRightBig"
+      duration={1500}
+    />
   );
 }
 const styles = StyleSheet.create({
