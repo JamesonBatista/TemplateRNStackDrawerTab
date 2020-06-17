@@ -16,21 +16,27 @@ import {
   KeyboardAvoidingView,
 } from 'react-native';
 import Loader from '../../Components/Loader';
+import * as Animatable from 'react-native-animatable';
+import {DrawerNavigator} from '../../Components/DrawerContent';
 
-const LoginScreen = (props) => {
+const LoginScreen = ({navigation}) => {
   let [userEmail, setUserEmail] = useState('');
   let [userPassword, setUserPassword] = useState('');
   let [loading, setLoading] = useState(false);
   let [errortext, setErrortext] = useState('');
   let [isRegistraionSuccess, setIsRegistraionSuccess] = useState(false);
   const [isSwitchOn, setIsSwitchOn] = useState(true);
+  const [app, setApp] = useState(false);
 
   const handleSubmitPress = () => {
     setLoading(true);
     setTimeout(() => {
-      setLoading(false);
-
       setIsRegistraionSuccess(true);
+    }, 3000);
+    setTimeout(() => {
+      setLoading(false);
+      setIsRegistraionSuccess(false);
+      setApp(true);
     }, 5000);
 
     // setErrortext('');
@@ -47,7 +53,9 @@ const LoginScreen = (props) => {
 
   if (isRegistraionSuccess) {
     return (
-      <View
+      <Animatable.View
+        animation="bounceInDown"
+        duration={2500}
         style={{
           flex: 1,
           backgroundColor: isSwitchOn ? '#000' : '#fff',
@@ -67,12 +75,18 @@ const LoginScreen = (props) => {
           onPress={() => setIsRegistraionSuccess(false)}>
           <Text style={styles.buttonTextStyle}>Iníciar</Text>
         </TouchableOpacity>
-      </View>
+      </Animatable.View>
     );
+  }
+  if (app) {
+    return <DrawerNavigator />;
   }
 
   return (
-    <View style={isSwitchOn ? styles.mainBody : styles.mainBodyWhite}>
+    <Animatable.View
+      style={isSwitchOn ? styles.mainBody : styles.mainBodyWhite}
+      animation="fadeInRightBig"
+      duration={1500}>
       <Loader loading={loading} />
       <ScrollView keyboardShouldPersistTaps="handled">
         <View style={{marginTop: 100}}>
@@ -89,19 +103,24 @@ const LoginScreen = (props) => {
                 elevation: 20,
                 marginBottom: 30,
               }}>
-              <TouchableOpacity
-                onPress={() => setIsSwitchOn(!isSwitchOn ? true : false)}>
-                <Image
-                  source={LOGO.LOGO_LOGIN}
-                  style={{
-                    width: 200,
-                    height: 200,
-                    resizeMode: 'contain',
-                  }}
-                />
-              </TouchableOpacity>
+              <Animatable.View animation="bounceInDown" duration={3500}>
+                <TouchableOpacity
+                  onPress={() => setIsSwitchOn(!isSwitchOn ? true : false)}>
+                  <Image
+                    source={LOGO.LOGO_LOGIN}
+                    style={{
+                      width: 200,
+                      height: 200,
+                      resizeMode: 'contain',
+                    }}
+                  />
+                </TouchableOpacity>
+              </Animatable.View>
             </View>
-            <View style={styles.SectionStyle}>
+            <Animatable.View
+              style={styles.SectionStyle}
+              animation="bounceInLeft"
+              duration={3500}>
               <TextInput
                 style={isSwitchOn ? styles.inputStyle : styles.inputStyleWhite}
                 onChangeText={(UserEmail) => setUserEmail(UserEmail)}
@@ -113,8 +132,11 @@ const LoginScreen = (props) => {
                 returnKeyType="next"
                 blurOnSubmit={false}
               />
-            </View>
-            <View style={styles.SectionStyle}>
+            </Animatable.View>
+            <Animatable.View
+              style={styles.SectionStyle}
+              animation="bounceInRight"
+              duration={3500}>
               <TextInput
                 style={isSwitchOn ? styles.inputStyle : styles.inputStyleWhite}
                 onChangeText={(UserPassword) => setUserPassword(UserPassword)}
@@ -126,29 +148,39 @@ const LoginScreen = (props) => {
                 blurOnSubmit={false}
                 secureTextEntry={true}
               />
-            </View>
+            </Animatable.View>
             {errortext != '' ? (
               <Text style={styles.errorTextStyle}> {errortext} </Text>
             ) : null}
-            <TouchableOpacity
-              style={styles.buttonStyle}
-              activeOpacity={0.5}
-              onPress={() => handleSubmitPress()}>
-              <Text style={styles.buttonTextStyle}>LOGIN</Text>
-            </TouchableOpacity>
+            <Animatable.View animation="bounceIn" duration={4000}>
+              <TouchableOpacity
+                style={styles.buttonStyle}
+                activeOpacity={0.5}
+                onPress={() => handleSubmitPress()}>
+                <Text style={styles.buttonTextStyle}>LOGIN</Text>
+              </TouchableOpacity>
+            </Animatable.View>
+
             <Text
               style={
                 isSwitchOn
                   ? styles.registerTextStyle
                   : styles.registerTextStyleBlack
               }
-              onPress={() => props.navigation.navigate('Register')}>
+              onPress={() => navigation.navigate('Register')}>
               Nova conta? Clique aqui!
             </Text>
           </KeyboardAvoidingView>
+          <Text
+            style={
+              isSwitchOn ? styles.forgetTextStyle : styles.forgetTextStyleblack
+            }
+            onPress={() => navigation.navigate('Register')}>
+            Esqueceu sua senha?
+          </Text>
         </View>
       </ScrollView>
-    </View>
+    </Animatable.View>
   );
 };
 export default LoginScreen;
@@ -225,5 +257,21 @@ const styles = StyleSheet.create({
     color: 'red',
     textAlign: 'center',
     fontSize: 14,
+  },
+  forgetTextStyle: {
+    color: 'blue',
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 14,
+    fontStyle: 'italic',
+    marginTop: 50,
+  },
+  forgetTextStyleblack: {
+    color: 'blue',
+    textAlign: 'center',
+    fontWeight: 'bold',
+    fontSize: 14,
+    fontStyle: 'italic',
+    marginTop: 50,
   },
 });
