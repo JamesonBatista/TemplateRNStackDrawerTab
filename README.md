@@ -5,7 +5,7 @@ Tamplate with, StackNavigator, Drawer Navigator, Tab Navigator.
 Icons whit image.
 
 <img
-src=“/Users/jameson.b.araujo/Desktop/ReactTest/FrutsTest/src/assets/Image/1.png”
+src=“src/assets/Image/1.png”
 raw=true
 alt=“Subject Pronouns”
 style=“margin-right: 10px;”
