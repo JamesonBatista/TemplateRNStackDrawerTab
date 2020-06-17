@@ -8,34 +8,36 @@ import {
   StyleSheet,
   TouchableOpacity,
   Image,
+  Platform,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 Ionicons.loadFont();
 
-import {createDrawerNavigator, DrawerItem} from '@react-navigation/drawer';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 import {ICONS} from '../src/assets/Imports';
 
 import TabNavigator from './TabsNavigator';
+import {DRAWER} from '../src/assets/Imports/index';
 
 export function CustomDrawerContent(props) {
   return (
     <ScrollView>
+      <View style={{marginBottom: 100}} />
       <SafeAreaView style={{flex: 1}}>
-        <TouchableOpacity
-          onPress={() => props.navigation.navigate('Home')}
-          style={styles.drawer}>
-          <Image source={ICONS.HOME} style={{margin: 10}} />
-
-          <Text>Inicio</Text>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          onPress={() => props.navigation.navigate('Settings')}
-          style={styles.drawer}>
-          <Image source={ICONS.SETTINGS} style={{margin: 10}} />
-
-          <Text>Opções</Text>
-        </TouchableOpacity>
+        {DRAWER.map((item) => {
+          return (
+            <>
+              <TouchableOpacity
+                onPress={() => props.navigation.navigate(item.name)}
+                style={styles.drawer}
+                key={item.name}>
+                <Image source={item.icon} style={{margin: 10}} />
+                <Text style={styles.text}>{item.text}</Text>
+              </TouchableOpacity>
+              <View style={styles.line} />
+            </>
+          );
+        })}
       </SafeAreaView>
       <View>
         <TouchableOpacity style={styles.drawerOut}>
@@ -64,17 +66,17 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center',
     padding: 10,
-    // borderWidth: 1,
-    // borderColor: 'black',
   },
   drawerOut: {
-    // paddingTop: 600,
-    // position: 'absolute',
-    // borderBottomColor: '#d2d2d2',
-    // borderTopColor: '#d2d2d2',
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
-    margin: 10,
+    margin: Platform.OS === 'ios' ? 20 : 10,
   },
+  line: {
+    height: 1,
+    backgroundColor: 'gray',
+    marginHorizontal: 10,
+  },
+  text: {},
 });

@@ -1,4 +1,5 @@
 const ICONS = {
+  LOGO: require('../logo.png'),
   MENU_HOME: require('../menu.png'),
   HOME: require('../home.png'),
   HOME_OUTLINE: require('../home-outline.png'),
@@ -6,10 +7,23 @@ const ICONS = {
   SETTINGS_OUTLINE: require('../settings-outline.png'),
   EXIT: require('../logout.png'),
   BACK: require('../back.png'),
-
-  LOGO: require('../logo.png'),
+  USER: require('../user.png'),
+  USER_OUTLINE: require('../user-outline.png'),
+  CATEGORY: require('../category.png'),
+  CATEGORY_OUTLINE: require('../category-outline.png'),
+  WALLET: require('../walletBox.png'),
+  WALLET_OUTLINE: require('../wallet.png'),
 };
 export {ICONS};
+
+export const DRAWER = [
+  {name: 'Home', icon: ICONS.HOME, text: 'Início'},
+  {name: 'Usuário', icon: ICONS.USER, text: 'Usuário'},
+  {name: 'Categorias', icon: ICONS.CATEGORY, text: 'Categorias'},
+  {name: 'Pagamento', icon: ICONS.WALLET, text: 'Pagamento'},
+  {name: 'Settings', icon: ICONS.SETTINGS, text: 'Opções'},
+];
+
 export const DATA = [
   {
     id: 1,
@@ -48,3 +62,9 @@ export const DATA = [
       'https://images.pexels.com/photos/726024/pexels-photo-726024.jpeg?cs=srgb&dl=sliced-pineapple-726024.jpg&fm=jpg',
   },
 ];
+
+const LOGO = {
+  LOGO_LOGIN: require('../logoLogin.png'),
+  LOGO_SUCESS: require('../sucess.png'),
+};
+export {LOGO};

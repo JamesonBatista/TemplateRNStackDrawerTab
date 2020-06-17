@@ -5,7 +5,13 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import {Image} from 'react-native';
 
-import HomeStack, {SettingsStack} from './Stacks';
+import HomeStack, {
+  SettingsStack,
+  UserStack,
+  CategoryStack,
+  WalletStack,
+} from './Stacks';
+
 import {ICONS} from '../src/assets/Imports';
 const Tab = createBottomTabNavigator();
 
@@ -13,13 +19,19 @@ export default function TabNavigator({navigation}) {
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
-        tabBarIcon: ({focused, color, size}) => {
+        tabBarIcon: ({focused}) => {
           let iconName;
 
           if (route.name === 'Home') {
             iconName = focused ? ICONS.HOME : ICONS.HOME_OUTLINE;
-          } else if (route.name === 'Settings') {
+          } else if (route.name === 'Opções') {
             iconName = focused ? ICONS.SETTINGS : ICONS.SETTINGS_OUTLINE;
+          } else if (route.name === 'Usuário') {
+            iconName = focused ? ICONS.USER : ICONS.USER_OUTLINE;
+          } else if (route.name === 'Categorias') {
+            iconName = focused ? ICONS.CATEGORY : ICONS.CATEGORY_OUTLINE;
+          } else if (route.name === 'Pagamento') {
+            iconName = focused ? ICONS.WALLET : ICONS.WALLET_OUTLINE;
           }
 
           // You can return any component that you like here!
@@ -33,11 +45,18 @@ export default function TabNavigator({navigation}) {
         },
       })}
       tabBarOptions={{
+        labelStyle: {
+          fontWeight: 'bold',
+          fontSize: 12,
+        },
         activeTintColor: 'black',
         inactiveTintColor: 'gray',
       }}>
       <Tab.Screen name="Home" component={HomeStack} />
-      <Tab.Screen name="Settings" component={SettingsStack} />
+      <Tab.Screen name="Opções" component={SettingsStack} />
+      <Tab.Screen name="Usuário" component={UserStack} />
+      <Tab.Screen name="Categorias" component={CategoryStack} />
+      <Tab.Screen name="Pagamento" component={WalletStack} />
     </Tab.Navigator>
   );
 }
