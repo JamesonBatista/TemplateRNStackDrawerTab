@@ -10,8 +10,6 @@ import {
   Image,
   Platform,
 } from 'react-native';
-import Ionicons from 'react-native-vector-icons/Ionicons';
-Ionicons.loadFont();
 
 import {createDrawerNavigator} from '@react-navigation/drawer';
 import {ICONS} from '../src/assets/Imports';
@@ -40,7 +38,9 @@ export function CustomDrawerContent(props) {
         })}
       </SafeAreaView>
       <View>
-        <TouchableOpacity style={styles.drawerOut}>
+        <TouchableOpacity
+          style={styles.drawerOut}
+          onPress={() => props.navigation.navigate('Login')}>
           <Image source={ICONS.EXIT} style={{margin: 10}} />
           <Text>SAIR</Text>
         </TouchableOpacity>

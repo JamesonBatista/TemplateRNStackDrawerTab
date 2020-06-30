@@ -34,7 +34,6 @@ export default function TabNavigator({navigation}) {
             iconName = focused ? ICONS.WALLET : ICONS.WALLET_OUTLINE;
           }
 
-          // You can return any component that you like here!
           return (
             <Image
               source={iconName}

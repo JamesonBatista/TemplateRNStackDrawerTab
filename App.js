@@ -5,6 +5,7 @@ import {NavigationContainer} from '@react-navigation/native';
 import {DrawerNavigator} from './Components/DrawerContent';
 import {LogintStack} from './Components/Stacks';
 
+// console.disableYellowBox = true;
 export default function App({user}) {
   return (
     <NavigationContainer>

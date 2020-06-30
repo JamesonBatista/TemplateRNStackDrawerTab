@@ -1,3 +1,59 @@
 #Tample construído por Jameson e Allysson afim de usar em projetos para React-Native.
 
 data = 16/06/2020 ----
+
+
+  <TouchableOpacity
+                          onPress={() => this.onChangeQuat(i, false)}>
+                          <Icon
+                            name="ios-remove-circle"
+                            size={35}
+                            color={'#33c37d'}
+                          />
+                        </TouchableOpacity>
+                        <Text
+                          style={{
+                            paddingHorizontal: 8,
+                            fontWeight: 'bold',
+                            fontSize: 18,
+                          }}>
+                          {item.quantify}
+                        </Text>
+                        <TouchableOpacity
+                          onPress={() => this.onChangeQuat(i, true)}>
+                          <Icon
+                            name="ios-add-circle"
+                            size={35}
+                            color={'#33c37d'}
+                          />
+                        </TouchableOpacity>
+
+
+
+
+  onChangeQuat(i, type) {
+    const cart = this.state.dataCart;
+    let cant = cart[i].quantify;
+    if (type) {
+      cant = cant + 1;
+      cart[i].quantify = cant;
+      this.setState({dataCart: cart});
+    } else if (type === false && cant >= 2) {
+      cant = cant - 1;
+      cart[i].quantify = cant;
+      this.setState({dataCart: cart});
+    } else if (type === false && cant === 1) {
+      cart.splice(i, 1);
+      this.setState({dataCart: cart});
+      AsyncStorage.setItem('cart', JSON.stringify(cart));
+    }
+  }
+
+  onLoadTotal() {
+    var total = 0;
+    const cart = this.state.dataCart;
+    for (let i = 0; i < cart.length; i++) {
+      total = total + cart[i].price * cart[i].quantify;
+    }
+    return total;
+  }
