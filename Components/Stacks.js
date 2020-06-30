@@ -4,9 +4,6 @@ import {TouchableOpacity, Image} from 'react-native';
 
 import {createStackNavigator} from '@react-navigation/stack';
 
-import Ionicons from 'react-native-vector-icons/Ionicons';
-Ionicons.loadFont();
-
 import SettingsScreen from '../src/Settings/index';
 import HomeScreen from '../src/Home/index';
 import UserScreen from '../src/User/index';
@@ -16,6 +13,7 @@ import WalletScreen from '../src/Wallet/index';
 import {ICONS} from '../src/assets/Imports';
 import LoginScreen from '../src/Login/index';
 import RegisterScreen from '../src/Register/index';
+import Pizzas from '../src/Pizzas/index';
 
 const Stack = createStackNavigator();
 export default function HomeStack({navigation}) {
@@ -166,6 +164,26 @@ export function LogintStack({navigation}) {
       <Stack.Screen
         name="Register"
         component={RegisterScreen}
+        options={{
+          headerShown: false,
+        }}
+      />
+    </Stack.Navigator>
+  );
+}
+export function PizzasStack({navigation}) {
+  return (
+    <Stack.Navigator initialRouteName="Pizzas">
+      <Stack.Screen
+        name="Pizzas"
+        component={Pizzas}
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        name="Pagamento"
+        component={WalletScreen}
         options={{
           headerShown: false,
         }}

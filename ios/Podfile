@@ -17,7 +17,6 @@ def add_flipper_pods!(versions = {})
 
   # List all transitive dependencies for FlipperKit pods
   # to avoid them being linked in Release builds
-pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
   pod 'Flipper', versions['Flipper'], :configuration => 'Debug'
   pod 'Flipper-DoubleConversion', versions['DoubleConversion'], :configuration => 'Debug'
