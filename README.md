@@ -4,12 +4,6 @@ Tamplate with, StackNavigator, Drawer Navigator, Tab Navigator.
 
 Icons whit image.
 
-//![alt text](./src/assets/Image/1.png)
-//![alt text](./src/assets/Image/2.png)
-//![alt text](./src/assets/Image/3.png)
-//![alt text](./src/assets/Image/4.png)
-//![alt text](./src/assets/Image/5.png)
-
 
 
 Bottom Elevation effect
@@ -35,3 +29,30 @@ const App = () => {
       </View>
     );
   };
+  
+    inner: {
+    backgroundColor: '#dee9f7',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderColor: '#e2ecfd',
+    borderWidth: 1,
+  },
+  topShadown: {
+    shadowOffset: {
+      width: -6,
+      height: -6,
+    },
+    shadowOpacity: 1,
+    shadowRadius: 6,
+    shadowColor: '#fff',
+    marginTop: 20,
+  },
+  bottomShadown: {
+    shadowOffset: {
+      width: 6,
+      height: 6,
+    },
+    shadowOpacity: 1,
+    shadowRadius: 6,
+    shadowColor: '#343434',
+  },
