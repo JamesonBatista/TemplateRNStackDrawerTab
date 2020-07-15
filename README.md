@@ -8,7 +8,6 @@ Icons whit image.
 
 Bottom Elevation effect
 
-const App = () => {
   const NeuMorph = ({children, size, style}) => {
     return (
       <View style={styles.topShadown}>
